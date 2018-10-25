@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% if my_title %}
+        <title>{{my_title}}</title>
+    {% else %}
+    <title>Default title</title>
+    {% endif %}
+</head>
+<body>
+    {%for post in posts %}
+        <h1>The title is: {{post.title}} </h1>
+    {% endfor %}
+</body>
+</html>
