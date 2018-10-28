@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+{% block content %}
+ 
+
+<table style="width:100%">
+    <tr>
+        <th colspan='4'> Photo Gallery</th>
+    </tr>
+        
+    <tr>
+        {% for picture in pictures %}
+            <td><a href="{{picture}}"</a><img src="{{picture}}" alt="Nature" width="150px" height="150px"></td>
+        {% endfor %}
+    </tr>
+</table>
+
+{% endblock content %}
+
+

@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% block content %}
+   
+    <div class=distro_head align="center">
+        <h1>{{ posts.title }}</h1>
+    </div>
+   <div class=distro_content align="left">
+    <img src="{{posts.logo}}" alt="No Picture" align="left">
+        <div class="distro_ul" font-size>
+            <ul>
+                <li>OS Type: Linux</li>
+                <li>Based on: Arch</li>
+                <li>Origin: Austria, Germany, France</li>
+                <li>Architecture: x86_64</li>
+                <li>Desktop: Awesome, bspwm, Budgie, Cinnamon, Deepin, GNOME, i3, KDE Plasma, LXQt, MATE, Openbox, Xfce</li>
+                <li>Category: Desktop, Live Medium</li>
+                <li>Status: Active</li>
+            </ul>
+        </div>
+   </div>
+   <p class="distro_intro">
+        Manjaro Linux is a fast, user-friendly, desktop-oriented operating system based on Arch Linux. Key features include intuitive installation process, automatic hardware detection, stable rolling-release model, ability to install multiple kernels, special Bash scripts for managing graphics drivers and extensive desktop configurability. Manjaro Linux offers Xfce as the core desktop options, as well as KDE, GNOME and a minimalist Net edition for more advanced users. Community-supported desktop flavours are also available. 
+   </p>
+    
+   <img src="{{posts.image}}" alt="No Picture" >
+{% endblock content %}

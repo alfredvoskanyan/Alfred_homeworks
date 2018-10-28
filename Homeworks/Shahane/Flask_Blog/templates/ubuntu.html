@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% block content %}
+   
+    <div class=distro_head align="center">
+        <h1>{{ posts.title }}</h1>
+    </div>
+   <div class=distro_content align="left">
+    <img src="{{posts.logo}}" alt="No Picture" align="left">
+        <div class="distro_ul" font-size>
+            <ul>
+                <li>OS Type: Linux</li>
+                <li>Based on: Debian</li>
+                <li>Origin: Isle of Man</li>
+                <li>Architecture: armhf, i686, powerpc, ppc64el, s390x, x86_64</li>
+                <li>Desktop: GNOME, Unity</li>
+                <li>Category: Beginners, Desktop, Server, Live Medium</li>
+                <li>Status: Active</li>
+            </ul>
+        </div>
+   </div>
+   <p class="distro_intro">
+    Ubuntu is a complete desktop Linux operating system, freely available with both community and professional support. The Ubuntu community is built on the ideas enshrined in the Ubuntu Manifesto: that software should be available free of charge, that software tools should be usable by people in their local language and despite any disabilities, and that people should have the freedom to customise and alter their software in whatever way they see fit. "Ubuntu" is an ancient African word, meaning "humanity to others". The Ubuntu distribution brings the spirit of Ubuntu to the software world. 
+    </p>
+    
+   <img src="{{posts.image}}" alt="No Picture" >
+{% endblock content %}
