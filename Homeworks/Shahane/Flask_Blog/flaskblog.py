@@ -1,5 +1,9 @@
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, url_for, redirect, flash
+from forms import RegistrationForm, LoginForm
+
 app = Flask(__name__)
+
+app.config['SECRET_KEY'] = 'asdfghjkl'
 
 data_temp = [
     {
@@ -71,8 +75,29 @@ def ubuntu():
 def gallery():
     return render_template('gallery.html', pictures = gallery_pictures)
 
+@app.route('/login', methods = ['GET', 'POST'])
+def login():
+    form1 = LoginForm()
+    my_username = 'betman'
+    my_password = 'betman123'
+    if form1.username.data == my_username and form1.password.data == my_password:
+        flash(f'Login Success {form1.username.data}!!!', 'success')
+        return render_template('login.html', form = form1)
+    else:
+        flash(f'Login Failed {form1.username.data}!!!', 'danger')
+        return render_template('login.html', form = form1)
+    return render_template('login.html', form = form1)
 
-
+@app.route('/register', methods = ['GET', 'POST'])
+def register():
+    form1 = RegistrationForm()
+    if form1.validate_on_submit():
+        flash(f'Welcome dear {form1.username.data}!!!', 'success')
+        return redirect(url_for('home'))
+    else:
+        flash(f'You are welcome dear {form1.username.data}!!!', 'danger')
+        return render_template('register.html', form = form1)
+    return render_template('register.html', form = form1)
 
 
 if __name__ == '__main__':
