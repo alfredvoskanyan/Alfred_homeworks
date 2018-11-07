@@ -4,7 +4,7 @@ from forms import RegistrationForm, LoginForm
 app = Flask(__name__)
 
 app.config['SECRET_KEY'] = 'asdfghjkl'
-
+loged_in = False
 data_temp = [
     {
         'author' : 'Manjaro home page',
@@ -53,7 +53,7 @@ gallery_pictures = [
 @app.route('/')
 @app.route('/home')
 def home():
-    return render_template('home.html', posts = data_temp, my_title = "Home")
+    return render_template('home.html', posts = data_temp, my_title = "Home", loged_in = loged_in)
 
 @app.route('/about')
 def about():
@@ -77,12 +77,21 @@ def gallery():
 
 @app.route('/login', methods = ['GET', 'POST'])
 def login():
+    user_pass = {}
     form1 = LoginForm()
-    my_username = 'betman'
-    my_password = 'betman123'
-    if form1.username.data == my_username and form1.password.data == my_password:
-        flash(f'Login Success {form1.username.data}!!!', 'success')
-        return render_template('login.html', form = form1)
+    
+    # Reading username and password from file to dictionary
+    with open('users.txt') as f:
+        credentials = [x.strip().split(':') for x in f.readlines()]
+    for username,password,email in credentials:
+        user_pass[username] = password
+    
+    # Checking credentials
+    if form1.username.data in user_pass and form1.password.data == user_pass[form1.username.data]:
+        flash(f'Loged in by \'{form1.username.data}\'', 'success')
+        global loged_in 
+        loged_in = True
+        return redirect(url_for('home'))
     else:
         flash(f'Login Failed {form1.username.data}!!!', 'danger')
         return render_template('login.html', form = form1)
@@ -90,13 +99,29 @@ def login():
 
 @app.route('/register', methods = ['GET', 'POST'])
 def register():
+    users = []
     form1 = RegistrationForm()
     if form1.validate_on_submit():
-        flash(f'Welcome dear {form1.username.data}!!!', 'success')
+        with open('users.txt') as f:
+            credentials = [x.strip().split(':') for x in f.readlines()]
+        
+        #Adding usernames to list
+        for username,password,email in credentials:
+            users.append(username)
+
+        #Checking if username already exist
+        if form1.username.data in users:
+            flash(f'Username {form1.username.data} already exist', 'danger')
+            return render_template('register.html', form = form1)
+        
+        #Appending Credentials to file
+        with open("users.txt", "a") as w:
+            w.write(form1.username.data + ':' + form1.password.data + ':' + form1.email.data + '\n' )
+        flash(f'registration succeeded for user  \'{form1.username.data}\'', 'success')
         return redirect(url_for('home'))
-    else:
-        flash(f'You are welcome dear {form1.username.data}!!!', 'danger')
-        return render_template('register.html', form = form1)
+    #else:
+       # flash(f'You not are welcome dear {form1.username.data}!!!', 'danger')
+       # return render_template('register.html', form = form1)
     return render_template('register.html', form = form1)
 
 

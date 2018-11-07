@@ -1,0 +1,7 @@
+admin:aaa:alfred.voskanyan@gmail.com
+prtgadmin:aaa:alfred.voskanyan@gmmail.com
+root:aaa:poghos@shnik.am
+aaa:aaa:alfred.voskanyan@mail.ru
+alfred:aaa:alfred.voskanyan@gmail.com
+sss:sss:alfred.voskanyan@gmail.com
+eee:eee:alfred.voskanyan@gmail.com
